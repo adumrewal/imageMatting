@@ -1,5 +1,5 @@
 # Deep Image Matting
-This repository is to reproduce deep image matting and is a modification to the codes used by foamliu.
+This repository is to reproduce [Deep image matting](https://arxiv.org/abs/1703.03872) and is a modification to the codes used by foamliu.
 
 ## History
 
