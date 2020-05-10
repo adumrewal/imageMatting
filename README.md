@@ -9,7 +9,7 @@ I have made the training process very simple. All you need to do is run 'python 
 
 ## Dependencies
 - [NumPy](http://docs.scipy.org/doc/numpy-1.10.1/user/install.html)
-- [Tensorflow 1.9.0](https://www.tensorflow.org/)
+- [Tensorflow 1.15.0](https://www.tensorflow.org/)
 - [Keras 2.1.6](https://keras.io/#installation)
 - [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/)
 
