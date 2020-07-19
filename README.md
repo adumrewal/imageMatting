@@ -1,4 +1,5 @@
 # Deep Image Matting
+Image Matting. Given an image, the code in this project can separate its foreground and background components.
 This repository is to reproduce [Deep image matting](https://arxiv.org/abs/1703.03872) and is a modification to the codes used by foamliu.
 
 ## History
@@ -35,7 +36,12 @@ Go to [PASCAL VOC](http://host.robots.ox.ac.uk/pascal/VOC/) to download:
 * VOC challenge 2008 [training/validation data](http://host.robots.ox.ac.uk/pascal/VOC/voc2008/VOCtrainval_14-Jul-2008.tar)
 * The test data for the [VOC2008 challenge](http://host.robots.ox.ac.uk/pascal/VOC/voc2008/index.html#testdata)
 
-## ImageNet Pretrained Models (Must-do)
+### ImageNet Pretrained Models (Must-do)
 Download [VGG16](https://github.com/fchollet/deep-learning-models/releases/download/v0.1/vgg16_weights_tf_dim_ordering_tf_kernels.h5) into "models" folder.
 
+### Results using the pre-trained model:
+Download foamliu's pre-trained Deep Image Matting [Model](https://github.com/foamliu/Deep-Image-Matting/releases/download/v1.0/final.42-0.0398.hdf5).
 
+Image/Trimap | Output/GT | New BG/Compose | 
+|---|---|---|
+||||
