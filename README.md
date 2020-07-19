@@ -8,7 +8,7 @@ Hi all,
 I have made the training process very simple. All you need to do is run 'python train.py' and you are all set. Appropriate comments have been added to ensure you can tune the parameters according to your use. If you get stuck anywhere, feel free to reach out.
 
 ## Dependencies
-- [NumPy](https://pypi.org/project/numpy/1.18.5/)
+- [NumPy 1.18.5](https://pypi.org/project/numpy/1.18.5/)
 - [Tensorflow 2.2.0](https://www.tensorflow.org/)
 - [Keras 2.4.3](https://keras.io/#installation)
 - [OpenCV 4](https://opencv.org/releases/)
