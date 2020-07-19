@@ -5,13 +5,13 @@ This repository is to reproduce [Deep image matting](https://arxiv.org/abs/1703.
 
 Hi all,
 	All of us must have tried finding available github codes to train a Deep Image Matting model. The most common repository we come across is [foamliu's repo](https://github.com/foamliu/Deep-Image-Matting). The repository is no longer being maintained and the documentation doesn't seem to be sufficient to help with the training. In light of this, I have created this repository for Deep Image matting training in tensorflow which I shall maintain and help solve your problems. I have also added various functionalities in the train.py to help configure your training.
-I have made the training process very simple. All you need to do is run 'python train.py' and you are all set.
+I have made the training process very simple. All you need to do is run 'python train.py' and you are all set. Appropriate comments have been added to ensure you can tune the parameters according to your use. If you get stuck anywhere, feel free to reach out.
 
 ## Dependencies
-- [NumPy](http://docs.scipy.org/doc/numpy-1.10.1/user/install.html)
-- [Tensorflow 1.15.0](https://www.tensorflow.org/)
-- [Keras 2.1.6](https://keras.io/#installation)
-- [OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/)
+- [NumPy](https://pypi.org/project/numpy/1.18.5/)
+- [Tensorflow 2.2.0](https://www.tensorflow.org/)
+- [Keras 2.4.3](https://keras.io/#installation)
+- [OpenCV 4](https://opencv.org/releases/)
 
 ## Dataset
 
