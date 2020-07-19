@@ -3,8 +3,13 @@ import os
 import keras
 import tensorflow as tf
 from keras.callbacks import ModelCheckpoint, EarlyStopping, ReduceLROnPlateau
-from keras.utils import multi_gpu_model
-from keras.backend.tensorflow_backend import set_session
+from tensorflow.compat.v1.keras.utils import multi_gpu_model
+from tensorflow.compat.v1.keras.backend import set_session
+from tensorflow.compat.v1 import ConfigProto as tfConfig
+from tensorflow.compat.v1 import Session as tfSession
+from tensorflow.compat.v1 import placeholder as tfPlaceholder
+from tensorflow.compat.v1 import RunOptions as tfRunOptions
+tf.compat.v1.disable_eager_execution()
 
 from config import patience, batch_size, epochs, num_train_samples, num_valid_samples
 from data_generator import train_gen, valid_gen
@@ -42,10 +47,10 @@ if __name__ == '__main__':
             fmt = checkpoint_models_path + 'final.%02d-%.4f.hdf5'
             self.model_to_save.save(fmt % (epoch, logs['val_loss']))
 
-    config = tf.ConfigProto()
+    config = tfConfig()
     config.gpu_options.allow_growth = True  # dynamically grow the memory used on the GPU
 #     config.log_device_placement = True  # to log device placement (on which device the operation ran)
-    sess = tf.Session(config=config)
+    sess = tfSession(config=config)
     set_session(sess)
     
     # Load our model, added support for Multi-GPUs
@@ -83,9 +88,9 @@ if __name__ == '__main__':
             migrate_model(final)
             
     sgd = keras.optimizers.SGD(lr=1e-5, decay=1e-6, momentum=0.9, nesterov=True)
-    decoder_target = tf.placeholder(dtype='float32', shape=(None, None, None, None))
-    run_opts = tf.RunOptions(report_tensor_allocations_upon_oom = False)
-    final.compile(optimizer=sgd, loss=overall_loss, target_tensors=[decoder_target],options=run_opts)
+    decoder_target = tfPlaceholder(dtype='float32', shape=(None, None, None, None))
+    run_opts = tfRunOptions(report_tensor_allocations_upon_oom = False)
+    final.compile(optimizer=sgd, loss=alpha_prediction_loss, target_tensors=[decoder_target],options=run_opts)
 
     print(final.summary())
     
@@ -109,6 +114,6 @@ if __name__ == '__main__':
                         use_multiprocessing=False,
                         workers=1
                         )
-    K.clear_session()
+    tf.keras.backend.clear_session()
 
 

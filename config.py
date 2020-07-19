@@ -1,8 +1,8 @@
 img_rows, img_cols = 320, 320
 # img_rows_half, img_cols_half = 160, 160
 channel = 4
-batch_size = 16
-epochs = 1000
+batch_size = 8
+epochs = 1
 patience = 50
 num_samples = 30
 num_train_samples = 20
