@@ -32,7 +32,6 @@ class DataGenSequence(Sequence):
         filename = dataset_path + ('{}_names.txt'.format(usage))
         with open(filename, 'r') as f:
             self.names = f.read().splitlines()[:num_train_samples]
-        print(self.names)
         np.random.shuffle(self.names)
 
     def __len__(self):
@@ -47,7 +46,6 @@ class DataGenSequence(Sequence):
 
         for i_batch in range(length):
             name = self.names[i]
-            print(name)
             inputname = (name.split('.')[0].split('_')[0])
             inputnumber = (name.split('.')[0].split('_')[1])
             
@@ -76,8 +74,6 @@ class DataGenSequence(Sequence):
             del image,alpha,trimap
 
             i += 1
-            print(batch_x.shape)
-            print(batch_y.shape)
 
         return batch_x, batch_y
 

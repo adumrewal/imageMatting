@@ -90,7 +90,9 @@ if __name__ == '__main__':
     sgd = keras.optimizers.SGD(lr=1e-5, decay=1e-6, momentum=0.9, nesterov=True)
     decoder_target = tfPlaceholder(dtype='float32', shape=(None, None, None, None))
     run_opts = tfRunOptions(report_tensor_allocations_upon_oom = False)
+    
     final.compile(optimizer=sgd, loss=alpha_prediction_loss, target_tensors=[decoder_target],options=run_opts)
+    # To use overall_loss/compositional_loss, ensure you are passing the expected number of channels in batch_y
 
     print(final.summary())
     
@@ -104,16 +106,16 @@ if __name__ == '__main__':
     callbacks = [model_checkpoint, early_stop, reduce_lr]#, tensor_board]
 
     # Start Fine-tuning
-    final.fit_generator(train_gen(),
-                        steps_per_epoch=num_train_samples // batch_size,
-                        validation_data=valid_gen(),
-                        validation_steps=num_valid_samples // batch_size,
-                        epochs=epochs,
-                        verbose=2,
-                        callbacks=callbacks,
-                        use_multiprocessing=False,
-                        workers=1
-                        )
+    final.fit(train_gen(),
+              steps_per_epoch=num_train_samples // batch_size,
+              validation_data=valid_gen(),
+              validation_steps=num_valid_samples // batch_size,
+              epochs=epochs,
+              verbose=2,
+              callbacks=callbacks,
+              use_multiprocessing=False,
+              workers=1
+             )
     tf.keras.backend.clear_session()
 
 

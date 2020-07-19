@@ -38,18 +38,23 @@ def alpha_prediction_loss(y_true, y_pred):
 # RGB colors composited by the ground truth foreground, the ground truth background and the predicted
 # alpha mattes.
 def compositional_loss(y_true, y_pred):
-    mask = y_true[:, :, :, 1]
-    mask = K.reshape(mask, (-1, img_rows, img_cols, 1))
-    image = y_true[:, :, :, 2:5]
-    image = K.reshape(image, (-1, img_rows, img_cols, 3))
-    fg = y_true[:, :, :, 5:8]
-    bg = y_true[:, :, :, 8:11]
-    c_g = image
-    c_p = y_pred * fg + (1.0 - y_pred) * bg
-    diff = c_p - c_g
-    diff = diff * mask
-    num_pixels = K.sum(mask)
-    return K.sum(K.sqrt(K.square(diff) + epsilon_sqr)) / (num_pixels + epsilon)
+    channels = tf.shape(y_true)[3]
+    assert_op = tf.Assert(
+        tf.greater_equal(channels, 11),
+        ['compositional_loss: channels < 11; Input channel count:',channels,'Please input correct number of channels in batch_y'])
+    with tf.control_dependencies([assert_op]):
+        mask = y_true[:, :, :, 1]
+        mask = K.reshape(mask, (-1, img_rows, img_cols, 1))
+        image = y_true[:, :, :, 2:5]
+        image = K.reshape(image, (-1, img_rows, img_cols, 3))
+        fg = y_true[:, :, :, 5:8]
+        bg = y_true[:, :, :, 8:11]
+        c_g = image
+        c_p = y_pred * fg + (1.0 - y_pred) * bg
+        diff = c_p - c_g
+        diff = diff * mask
+        num_pixels = K.sum(mask)
+        return K.sum(K.sqrt(K.square(diff) + epsilon_sqr)) / (num_pixels + epsilon)
 
 
 # compute the MSE error given a prediction, a ground truth and a trimap.
